@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Buscador</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>j
+</head>
+<body>
+
+<div class="container">
+  <h1><i class="fa fa-search"></i> Buscador</h1> 
+  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Canciones</th>
+        <th><%= link_to new_song_path, class: 'btn btn-success btn-xs', title: 'New Song' do %>
+            <span class="fa fa-plus"></span>
+            <% end %>
+        </th>
+    </thead>
+    <tbody id="myTable">
+      <% @songs.each do |song| %>
+        <tr>
+          <td><%= song.name %></td>
+          <td><%= link_to song, class: 'btn btn-info btn-xs', title: 'Show' do %>
+                <span class="fa fa-play"></span>
+              <% end %>
+              <% if current_user.admin? %>
+                <%= link_to edit_song_path(song), class: 'btn btn-info btn-xs', title: 'Edit' do %>
+                  <span class="fa fa-pencil"></span>
+                <% end %>
+                <%= link_to song, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs', title: 'Destroy' do %>
+                  <span class="fa fa-trash"></span>
+                <% end %>
+              <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Artistas</th>
+         <th>
+        	<%= link_to new_artist_path, class: 'btn btn-success btn-xs', title: 'New Artist' do %>
+        	  <span class="fa fa-plus"></span>
+        	<% end %>
+        </th>
+    </thead>
+    <tbody id="myTable">
+      <% @artists.each do |artist| %>
+        <tr>
+          <td><%= artist.name %></td>
+          <td><%= link_to artist, class: 'btn btn-info btn-xs', title: 'Show' do %>
+                <span class="fa fa-eye"></span>
+              <% end %>
+              <% if current_user.admin? %>
+                <%= link_to edit_artist_path(artist), class: 'btn btn-info btn-xs', title: 'Edit' do %>
+                  <span class="fa fa-pencil"></span>
+                <% end %>
+                <%= link_to artist, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs', title: 'Destroy' do %>
+                  <span class="fa fa-trash"></span>
+                <% end %>
+              <% end %>
+          </td>
+        </tr>
+        
+      <% end %>
+    </tbody>
+  </table>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Albums</th>
+        <th>
+        	<%= link_to new_album_path, class: 'btn btn-success btn-xs', title: 'New Album' do %>
+	            <span class="fa fa-plus"></span>
+	        <% end %>
+        </th>
+    </thead>
+    <tbody id="myTable">
+      <% @albums.each do |album| %>
+        <tr>
+          <td><%= album.name %></td>
+          <td><%= link_to album, class: 'btn btn-info btn-xs', title: 'Show' do %>
+                <span class="fa fa-eye"></span>
+              <% end %>
+              <% if current_user.admin? %>
+                <%= link_to edit_album_path(album), class: 'btn btn-info btn-xs', title: 'Edit' do %>
+                  <span class="fa fa-pencil"></span>
+                <% end %>
+                <%= link_to album, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs', title: 'Destroy' do %>
+                  <span class="fa fa-trash"></span>
+                <% end %>
+              <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Generos</th>
+        <th>
+        	<%= link_to new_gender_path, class: 'btn btn-success btn-xs', title: 'New Gender' do %>
+              <span class="fa fa-plus"></span>
+            <% end %>
+        </th>
+    </thead>
+    <tbody id="myTable">
+      <% @genders.each do |gender| %>
+        <tr>
+          <td><%= gender.name %></td>
+          <td><%= link_to gender, class: 'btn btn-info btn-xs', title: 'Show' do %>
+                <span class="fa fa-eye"></span>
+              <% end %>
+              <% if current_user.admin? %>
+                <%= link_to edit_gender_path(gender), class: 'btn btn-info btn-xs', title: 'Edit' do %>
+                  <span class="fa fa-pencil"></span>
+                <% end %>
+                <%= link_to gender, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs', title: 'Destroy' do %>
+                  <span class="fa fa-trash"></span>
+                <% end %>
+              <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+</body>
+</html>

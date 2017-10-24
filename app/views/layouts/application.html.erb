@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.css">
+  <title>Mewseek</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>SB Admin - Start Bootstrap Template</title>
+  <!-- Bootstrap core CSS-->
+  <link href="https://blackrockdigital.github.io/startbootstrap-sb-admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="https://blackrockdigital.github.io/startbootstrap-sb-admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="https://blackrockdigital.github.io/startbootstrap-sb-admin/css/sb-admin.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+	  .sidebar { 
+	  margin-bottom: -5000px; 
+	  padding-bottom: 5000px; 
+	} 
+  </style>
+</head>
+<body>
+  <% if current_user.nil?%>
+  <% else %>
+	  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+	    <a class="navbar-brand" href="/admin/index">MewSeek</a>
+	    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarResponsive">
+	      <% if current_user.baneado? %>
+  		  <% else %>
+		      <ul class="navbar-nav navbar-sidenav sidebar" id="exampleAccordion">
+		        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+		          <a class="nav-link" href="/songs">
+		            <i class="fa fa-fw fa-music"></i>
+		            <span class="nav-link-text">Canciones</span>
+		          </a>
+		        </li>
+		        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+		          <a class="nav-link" href="/artists">
+		            <i class="fa fa-fw fa fa-user"></i>
+		            <span class="nav-link-text">Artistas</span>
+		          </a>
+		        </li>
+		        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+		          <a class="nav-link" href="/albums">
+		            <i class="fa fa-fw fa fa-book"></i>
+		            <span class="nav-link-text">Albums</span>
+		          </a>
+		        </li>
+		        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+		          <a class="nav-link" href="/genders">
+		            <i class="fa fa-fw fa fa-superpowers"></i>
+		            <span class="nav-link-text">Generos</span>
+		          </a>
+		        </li>
+		        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+		          <a class="nav-link" href="/searcher/index">
+		            <i class="fa fa-fw fa fa-search"></i>
+		            <span class="nav-link-text">Buscador</span>
+		          </a>
+		        </li>
+		        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+		          <a class="nav-link" href="/song_users">
+		            <i class="fa fa-fw fa fa-headphones"></i>
+		            <span class="nav-link-text">Mi Musica</span>
+		          </a>
+		        </li>
+		        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+		          <a class="nav-link" href="/playlists">
+		            <i class="fa fa-fw fa fa-list"></i>
+		            <span class="nav-link-text">Listas</span>
+		          </a>
+		        </li>
+		        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+		          <a class="nav-link" href="/usuarios/index">
+		            <i class="fa fa-fw fa fa-address-book-o"></i>
+		            <span class="nav-link-text">Usuarios</span>
+		          </a>
+		        </li>
+		        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+		          <a class="nav-link" href="/friend/index">
+		            <i class="fa fa-fw fa fa-users"></i>
+		            <span class="nav-link-text">Amigos</span>
+		          </a>
+		        </li>
+		        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+		          <a class="nav-link" href="/news">
+		            <i class="fa fa-fw fa-newspaper-o"></i>
+		            <span class="nav-link-text">Noticias</span>
+		          </a>
+		        </li>
+		      </ul>
+		  <% end %>
+	      <ul class="navbar-nav navbar-right">
+	      	<h3 style="color:white"><%= current_user.email %>      </h3>
+	        <div class="dropdown">
+		    	<i class="icon-ok-sign fa fa-user dropdown-toggle" data-toggle="dropdown" style="color:white;font-size: 3em;""></i>
+		    	<ul class="dropdown-menu">
+			      <li><%= link_to('Logout', destroy_user_session_path, method: :delete)%></li>
+			      <li><a href="/users/edit">Editar Perfil</a></li>
+		    	</ul>
+		    </div>
+	      </ul>
+	    </div>
+	  </nav>
+  <% end %>
+
+
+<script src="https://blackrockdigital.github.io/startbootstrap-sb-admin/vendor/datatables/jquery.dataTables.js"></script>
+<script src="https://blackrockdigital.github.io/startbootstrap-sb-admin/vendor/datatables/dataTables.bootstrap4.js"></script>
+<script src="https://blackrockdigital.github.io/startbootstrap-sb-admin/js/sb-admin-datatables.min.js"></script>
+ 
+
+<%= yield %>
+
+
+</body>
+</html>
+

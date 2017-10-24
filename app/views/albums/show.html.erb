@@ -1,0 +1,53 @@
+<%= link_to 'Edit', edit_album_path(@album) %> |
+<%= link_to 'Back', albums_path %>
+<body bgcolor="#E6E6FA">
+	<div class="col-md-4" style="margin-left: 50em;">
+		<div class="card mt-4">
+		    <img class="card-img-top img-fluid" src=<%= @album.image.url(:medium) %>>
+		    <div class="card-body">
+		      <h3 class="card-title">Album: <%= @album.name %></h3>
+		      <h3 class="card-title">Artista: <%= @album.artist.name %></h3>
+	          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	            <thead>
+	              <tr>
+	                <th>Nombre</th>
+	                <th>Año</th>
+	                <th>Genero</th>
+	                <th>Duracion</th>
+	                <th>Punctuacion</th>
+	                <th colspan="3">
+	                      <%= link_to new_song_path, class: 'btn btn-success btn-xs', title: 'New Song' do %>
+	                        <span class="fa fa-plus"></span>
+	                      <% end %></th>
+	              </tr>
+	            </thead>
+
+	            <tbody>
+	              <% @songs.each do |song| %>
+	                <tr>
+	                  <td><%= song.name %></td>
+	                  <td><%= song.year %></td>
+	                  <td><%= song.gender_id %></td>
+	                  <td><%= song.duration %></td>
+	                  <td><%= song.punctuation %></td>
+	                  <td><%= link_to song, class: 'btn btn-info btn-xs', title: 'Show' do %>
+	                        <span class="fa fa-eye"></span>
+	                      <% end %>
+	                      <%= link_to edit_song_path(song), class: 'btn btn-info btn-xs', title: 'Edit' do %>
+	                        <span class="fa fa-pencil"></span>
+	                      <% end %>
+	                      <%= link_to song, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs', title: 'Destroy' do %>
+	                        <span class="fa fa-trash"></span>
+	                      <% end %>
+	                  </td>
+	                </tr>
+	              <% end %>
+	            </tbody>
+	          </table>
+	        </div>
+		</div>
+	</div>
+</body>
+
+
+

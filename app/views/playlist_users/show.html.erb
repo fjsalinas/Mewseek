@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Playlist:</strong>
+  <%= @playlist_user.playlist_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @playlist_user.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_playlist_user_path(@playlist_user) %> |
+<%= link_to 'Back', playlist_users_path %>

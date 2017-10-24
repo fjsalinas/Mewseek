@@ -1,0 +1,48 @@
+<head>
+ <!-- Bootstrap core CSS-->
+  <link href="https://blackrockdigital.github.io/startbootstrap-sb-admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="https://blackrockdigital.github.io/startbootstrap-sb-admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="https://blackrockdigital.github.io/startbootstrap-sb-admin/css/sb-admin.css" rel="stylesheet">
+</head>
+<body class="bg-dark">
+  <%= bootstrap_devise_error_messages! %>
+  <div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Register an Account</div>
+      <div class="card-body">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart:true, role: 'form' }) do |f| %>
+          <div class="form-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, autofocus: true, class: 'form-control', :required => true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password, class: 'form-control', :required => true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, class: 'form-control', :required => true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :admin %>
+            <%= f.check_box :admin, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.file_field :image, class: 'form-control', id: "avatar-1", type: "file" %>   
+          </div>
+          <%= f.submit t('.sign_up', default: 'Sign up', href: '/songs'), class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="https://blackrockdigital.github.io/startbootstrap-sb-admin/vendor/jquery/jquery.min.js"></script>
+  <script src="https://blackrockdigital.github.io/startbootstrap-sb-admin/vendor/popper/popper.min.js"></script>
+  <script src="https://blackrockdigital.github.io/startbootstrap-sb-admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="https://blackrockdigital.github.io/startbootstrap-sb-admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+<%= render 'devise/shared/links' %>

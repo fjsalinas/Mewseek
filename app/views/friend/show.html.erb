@@ -1,0 +1,32 @@
+<div class="container" style="margin-left:20em;">
+  <div class="row">
+    <div class="col-md-10">
+      <h1 class="my-4"><i class="fa fa-user"></i>  <%= @friend.email %></h1>
+    </div>
+  </div>
+
+  <% @playlists_user.each do |playlist| %>
+    <% playlist = @playlists.find_by_id(playlist.playlist_id) %>
+    <div class="row">
+      <div class="col-md-2">
+        <img class="img-fluid rounded mb-3 mb-md-0" src="https://listolistas.files.wordpress.com/2016/09/list-icons-free-icons-in-devine-icon-search-engine-53.png" alt="">
+      </div>
+      <div class="col-md-6">
+        <h1><%= playlist.name %></h1>
+      </div>
+      <div class="col-md-4">
+        <div class="col-md-2">
+          <%= link_to playlist, class: 'btn btn-info', title: 'Show' do %>
+            <span class="fa fa-eye"></span>
+          <% end %>
+        </div>
+        <div class="col-md-4">
+        	<%= link_to new_playlist_user_path({:playlist_id => playlist.id, :user_id => current_user}) do %>
+	          	<button class="fa fa-cloud-download btn btn-primary"></button>
+	        <% end %>
+        </div>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+</div>

@@ -1,0 +1,50 @@
+<div class="container" style="margin-left:20em;">
+  <div class="row">
+    <div class="col-md-10">
+      <h1 class="my-4"><i class="fa fa-address-book-o"></i>  Usuarios</h1>
+    </div>
+  </div>
+
+  <% @users.each do |user| %>
+    <div class="row">
+      <div class="col-md-2">
+        <a href="#">
+          <img class="img-fluid rounded mb-3 mb-md-0" src=<%=user.image.url(:medium) %> alt="">
+        </a>
+      </div>
+      <div class="col-md-6">
+        <h2><%= user.email %></h2>
+        <% if user.baneado? %>
+          <h3 style="color:red;">(Baneado)</h3>
+        <% end %>
+      </div>
+      <div class="col-md-4">
+    	  <div class="col-md-2">
+    	    <%= link_to new_follow_path({:user_id_1 => current_user.id, :user_id_2 => user.id}), class: "btn btn-primary" do %>
+                <span class="fa fa-refresh"></span>
+              <% end %>
+        </div>
+        <% if current_user.admin? %>
+          <% if user.admin? %>
+          <% else %>
+            <% if user.baneado? %>
+              <div class="col-md-2">
+                <%= link_to desbaneo_path({:user_id => user.id}), class: "btn btn-success" do %>
+                      <span class="fa fa-check"></span>
+                <% end %>
+              </div>
+
+            <% else %>
+              <div class="col-md-2">
+                <%= link_to baneo_path({:user_id => user.id}), class: "btn btn-danger" do %>
+                      <span class="fa fa-times"></span>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+	    </div>
+    </div>
+    <hr>
+  <% end %>
+</div>

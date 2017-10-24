@@ -1,0 +1,51 @@
+
+
+<boby style="background-color: #ccc;">
+  <class class="bg-silver">
+    <div class="row" style="margin-top:10em;">
+      <%= form_for(@news, :html => {:class => 'col-sm-3 col-sm-offset-4 well'}) do |f| %>
+        <% if @news.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@news.errors.count, "error") %> prohibited this news from being saved:</h2>
+
+            <ul>
+            <% @news.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <h1 align="center">Noticia</h1>
+        <div class="row" style="margin-button: 2em;">
+          <div class="col-sm-4 col-sm-offset-4"">
+            <p class="text-center "style="width: 7em; height: 7em; border-radius: 100%; background-color: white; margin: 0 auto; padding-top:2em;">
+              <span style="font-size: 3em; color: #597BB8;" class="fa fa-newspaper-o"></span>
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <%= f.label :title %><br>
+            <%= f.text_field :title, class: 'form-control', :required => true %>
+          </div>
+          <div class="form-group">
+            <%= f.label :description %><br>
+            <%= f.text_area :description, class: 'form-control', :required => true %>
+          </div>
+          <div class="row">
+            <div class="actions">
+              <%= f.submit %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </class>
+</body>
+<script>
+var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' + 
+    'onclick="alert(\'Call your custom code here.\')">' +
+    '<i class="glyphicon glyphicon-tag"></i>' +
+    '</button>'; 
+</script>
+

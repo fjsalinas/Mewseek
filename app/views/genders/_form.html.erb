@@ -1,0 +1,38 @@
+<boby style="background-color: #ccc;">
+  <div class="bg-silver">
+    <div class="row" style="margin-top:10em;">
+      <%= form_for(@gender, :html => {:class => 'col-sm-3 col-sm-offset-4 well'}) do |f| %>
+        <% if @gender.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@gender.errors.count, "error") %> prohibited this album from being saved:</h2>
+
+            <ul>
+            <% @gender.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <h1 align="center">Genero</h1>
+        <div class="row" style="margin-button: 2em;">
+          <div class="col-sm-4 col-sm-offset-4"">
+            <p class="text-center "style="width: 7em; height: 7em; border-radius: 100%; background-color: white; margin: 0 auto; padding-top:2em;">
+              <span style="font-size: 3em; color: #597BB8;" class="fa fa-superpowers"></span>
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <%= f.label :name %><br>
+            <%= f.text_field :name, class: 'form-control', :required => true %>
+          </div>
+          <div class="row">
+            <div class="actions">
+              <%= f.submit %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</boby>

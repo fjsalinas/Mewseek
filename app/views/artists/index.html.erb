@@ -1,0 +1,98 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #3ADF00;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 10px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .button:hover span {
+    padding-right: 25px;
+  }
+
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  </style>
+</head>
+<body>
+<div class="container" style="margin-left:20em;">
+  <div class="row">
+    <div class="col-md-10">
+      <h1 class="my-4"><i class="fa fa-user"></i>  Artistas</h1>
+    </div>
+    <div class="col-md-2">
+      <%= link_to new_artist_path, class: 'button btn-success btn-xs', title: 'New Artist' do %>
+        <span class="fa fa-plus">  Agregar</span>
+      <% end %>
+    </div>
+  </div>
+
+  <% @artists.each do |artist| %>
+    <div class="row">
+      <div class="col-md-2">
+        <a href="#">
+          <img class="img-fluid rounded mb-3 mb-md-0" src="https://image.freepik.com/iconos-gratis/artista-representacion-reproductor-de-musica_318-9560.jpg" alt="">
+        </a>
+      </div>
+      <div class="col-md-4">
+        <h2><%= artist.name %></h2>
+        <h5><%= artist.year %></h5>
+      </div>
+      <div class="col-md-6">
+        <div class="col-md-1">
+          <%= link_to artist, class: 'btn btn-info', title: 'Show' do %>
+            <span class="fa fa-eye"></span>
+          <% end %>
+        </div>
+        <% if current_user.admin? %>
+          <div class="col-md-1">
+            <%= link_to edit_artist_path(artist), class: 'btn btn-warning', title: 'Edit' do %>
+              <span class="fa fa-pencil"></span>
+            <% end %>
+          </div>
+          <div class="col-md-1">
+            <%= link_to artist, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', title: 'Destroy' do %>
+              <span class="fa fa-trash"></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+</div>
+</body>
+</html>
+

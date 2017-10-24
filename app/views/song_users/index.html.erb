@@ -1,0 +1,51 @@
+<html>
+<head>
+</head>
+<body>
+<div class="container" style="margin-left:20em;">
+  <div class="row">
+    <div class="col-md-10">
+      <h1 class="my-4"><i class="fa fa-headphones"></i>  Mi Musica</h1>
+    </div>
+  </div>
+
+  <% @my_music.each do |song| %>
+    <% @my_song = @songs.find_by_id(song.song_id)%>
+    <div class="row">
+      <div class="col-md-2">
+        <a href="#">
+          <img class="img-fluid rounded mb-3 mb-md-0" src=<%=@albums.find_by_id(@my_song.album_id).image.url(:medium) %> alt="">
+        </a>
+      </div>
+      <div class="col-md-8">
+        <h2><%= @my_song.name %></h2>
+        <h5><%= @artists.find_by_id(@my_song.artist_id).name %></h5>
+      </div>
+      <div class="col-md-1">
+        <a href="/songs/<%= @my_song.id %>">
+          <button class="btn btn-info fa fa-play"></button>
+        </a>
+      </div>
+      <div class="col-md-1">
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle fa fa-list" type="button" data-toggle="dropdown">
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <% @playlists_user.each do |playlist| %>
+              <% playlist = @playlists.find_by_id(playlist.playlist_id) %>
+              <li>
+                <%= link_to new_playlist_content_path({:playlist_id => playlist.id, :song_id => @my_song.id}) do %>
+                  <span class="fa fa-plus"><%= playlist.name %></span>
+                <% end %>
+              </li>
+       
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+</div>
+</body>
+</html>

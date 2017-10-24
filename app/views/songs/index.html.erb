@@ -1,0 +1,120 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #3ADF00;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 10px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .button:hover span {
+    padding-right: 25px;
+  }
+
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  </style>
+</head>
+<body>
+<div class="container" style="margin-left:20em;">
+  <div class="row">
+    <div class="col-md-10">
+      <h1 class="my-4"><i class="fa fa-music"></i>  Canciones</h1>
+    </div>
+    <div class="col-md-2">
+      <%= link_to new_song_path, class: 'button btn-success btn-xs', title: 'New Artist' do %>
+        <span class="fa fa-plus">  Agregar</span>
+      <% end %>
+    </div>
+  </div>
+
+  <% @songs.each do |song| %>
+    <div class="row">
+      <div class="col-md-2">
+        <a href="#">
+          <img class="img-fluid rounded mb-3 mb-md-0" src=<%=@albums.find_by_id(song.album_id).image.url(:medium) %> alt="">
+        </a>
+      </div>
+      <div class="col-md-4">
+        <h2><%= song.name %></h2>
+        <h5><%= @artists.find_by_id(song.artist_id).name %></h5>
+      </div>
+      <div class="col-md-6">
+        <div class="col-md-1">
+          <%= link_to new_song_user_path({:user_id => current_user.id, :song_id => song.id}), class: "btn btn-success" do %>
+            <span class="fa fa-plus"></span>
+          <% end %>
+        </div>
+        <div class="col-md-1">
+          <%= link_to song, class: 'btn btn-info', title: 'Show' do %>
+            <span class="fa fa-play"></span>
+          <% end %>
+        </div>
+        <% if current_user.admin? %>
+          <div class="col-md-1">
+            <%= link_to edit_song_path(song), class: 'btn btn-warning', title: 'Edit' do %>
+              <span class="fa fa-pencil"></span>
+            <% end %>
+          </div>
+          <div class="col-md-1">
+            <%= link_to song, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', title: 'Destroy' do %>
+              <span class="fa fa-trash"></span>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="col-md-1">
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle fa fa-list" type="button" data-toggle="dropdown">
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <% @playlists_user.each do |playlist| %>
+                <% @my_playlist = @playlists.find_by_id(playlist.playlist_id) %>
+                <li>
+                  <%= link_to new_playlist_content_path({:playlist_id => @my_playlist.id, :song_id => song.id}) do %>
+                    <span class="fa fa-plus"><%= @my_playlist.name %></span>
+                  <% end %>
+                </li>
+         
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+</div>
+</body>
+</html>
+

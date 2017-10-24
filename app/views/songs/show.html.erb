@@ -1,0 +1,23 @@
+<div class="col-lg-4" style="margin-left:50em;">
+
+  <div class="card mt-4">
+    <img class="card-img-top img-fluid" src=<%= @album.image.url(:medium) %> alt="">
+    <div class="card-body">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+        aria-valuemin="0" aria-valuemax="100" style="width:70%">
+          <span class="sr-only">70% Complete</span>
+        </div>
+      </div>
+      <h3 class="card-title" align="center" ><%= @song.name %></h3>
+      <h4 align="center"><%= @artist.name %> - <%= @album.name %></h4>
+      <div class="row" style="margin-left:8em;">
+        <h1 class="fa fa-backward fa-4x">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+        <h1 class="fa fa-play fa-4x">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+        <h1 class="fa fa-forward fa-4x">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+      </div>
+      <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+      4.0 stars
+    </div>
+  </div>
+</div>

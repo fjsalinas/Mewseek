@@ -1,0 +1,34 @@
+<html>
+<head>
+</head>
+<body>
+<div class="container" style="margin-left:20em;">
+  <div class="row">
+    <div class="col-md-10">
+      <h1 class="my-4"><i class="fa fa-list"></i><%= @playlist.name %></h1>
+    </div>
+  </div>
+
+  <% @list_songs.each do |song| %>
+    <% @my_song = @songs.find_by_id(song.song_id)%>
+    <div class="row">
+      <div class="col-md-2">
+        <a href="#">
+          <img class="img-fluid rounded mb-3 mb-md-0" src=<%=@albums.find_by_id(@my_song.album_id).image.url(:medium) %> alt="">
+        </a>
+      </div>
+      <div class="col-md-9">
+        <h2><%= @my_song.name %></h2>
+        <h5><%= @artists.find_by_id(@my_song.artist_id).name %></h5>
+      </div>
+      <div class="col-md-1">
+      	<a href="/songs/<%= @my_song.id %>">
+   	      <button class="btn btn-info fa fa-play"></button>
+   	    </a>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+</div>
+</body>
+</html>

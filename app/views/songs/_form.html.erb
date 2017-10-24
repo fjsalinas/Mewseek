@@ -1,0 +1,76 @@
+<body class="bg-silver">
+  <div class="row" style="margin-left:25em;">
+    <%= form_for(@song, :html => {:class => 'col-sm-3 col-sm-offset-4 well'}) do |f| %>
+      <% if @song.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@song.errors.count, "error") %> prohibited this song from being saved:</h2>
+
+          <ul>
+          <% @song.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <h1 align="center">Cancion</h1>
+      <div class="row" style="margin-button: 2em;">
+        <div class="col-sm-4 col-sm-offset-4">
+          <p class="text-center "style="width: 7em; height: 7em; border-radius: 100%; background-color: white; margin: 0 auto; padding-top:2em;">
+            <span style="font-size: 3em; color: #597BB8;" class="fa fa-music"></span>
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="form-group">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, class: 'form-control', :required => true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :year %><br>
+          <%= f.number_field :year, class:"form-control", :required => true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :artist_id %><br>
+          <%= f.select(:artist_id, 
+            options_for_select(
+              @artists.select(:name, :id).map{ |x| ["#{x.name}", x.id]},
+              selected: @artists.try(:id),
+              ),
+            class: 'selectContainer') 
+          %>
+        </div>
+        <div class="form-group">
+          <%= f.label :album_id %><br>
+          <%= f.select(:album_id, 
+            options_for_select(
+              @albums.select(:name, :id).map{ |x| ["#{x.name}", x.id]},
+              selected: @albums.try(:id),
+              ),
+            class: 'selectContainer') 
+          %>
+        </div>
+        <div class="form-group">
+          <%= f.label :gender_id %><br>
+          <%= f.select(:gender_id, 
+            options_for_select(
+              @genders.select(:name, :id).map{ |x| ["#{x.name}", x.id]},
+              selected: @genders.try(:id),
+              ),
+            class: 'form-control') 
+          %>
+        </div>
+        <div class="form-group">
+          <%= f.label :duration %><br>
+          <%= f.number_field :duration, class:"form-control", :required => true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :punctuation %><br>
+          <%= f.number_field :punctuation, class:"form-control", :required => true %>
+        </div>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</body>

@@ -1,0 +1,40 @@
+<body style="background-color: #ccc;">
+  <div class="bg-silver">
+    <div class="row" style="margin-top:10em; margin-left:10em;">
+      <%= form_for(@artist, :html => {:class => 'col-sm-4 col-sm-offset-4 well'}) do |f| %>
+        <% if @artist.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
+
+            <ul>
+            <% @artist.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <h1 align="center">Artista</h1>
+        <div class="row" style="margin-bottom: 2em;">
+          <div class="col-sm-4 col-sm-offset-4"">
+            <p class="text-center "style="width: 7em; height: 7em; border-radius: 100%; background-color: white; margin: 0 auto; padding-top:2em;">
+              <span style="font-size: 3em; color: #597BB8;" class="fa fa-user"></span>
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label "Nombre:" %><br>
+          <%= f.text_field :name, class: 'form-control', :required => true %>
+        </div>
+        <div class="form-group">
+          <%= f.label "Año:" %><br>
+          <%= f.number_field :year, class: 'form-control', :required => true %>
+        </div>
+        <div class="actions" align="center">
+          <%= f.submit "Crear Artista" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</body>
+
